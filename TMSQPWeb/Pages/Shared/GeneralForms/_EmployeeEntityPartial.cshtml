@@ -1,0 +1,88 @@
+﻿@model EmployeeViewModel
+
+
+
+
+
+<div class="inner bg-blue-lighter mb-4">
+    <h4 class="mt-3 mb-4">
+    </h4>
+    <div class="flex-box row">
+        <div class="col-3">
+            <div class="form-group">
+                <label asp-for="EmployeeId"></label>
+                <input type="text" asp-for=EmployeeId
+                        required
+                        readonly="@(Model.IsReadonly)"
+                        class="form-control" />
+                <span asp-validation-for="EmployeeId" class="text-danger"></span>
+            </div>
+        </div>
+
+        
+
+        
+        <div class="items cols-3">
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input type="text" asp-for=Email
+                       required
+                       readonly="@(Model.IsReadonly)"
+                       class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+
+       
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="inner bg-blue-lighter mb-4">
+    <h4 class="mt-3 mb-4">
+    </h4>
+    <div class="flex-box">
+
+        <div class="w-100"></div>
+        <div class="items cols-1">
+            <div class="form-group">
+                <label asp-for="Remark"></label>
+                <input asp-for=Remark type="text" readonly="@Model.IsReadonly" class="form-control" />
+                <span asp-validation-for="Remark" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="w-100"></div>
+
+
+
+
+       
+
+
+    </div>
+</div>
+
+
+
+
+

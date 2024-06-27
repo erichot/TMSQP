@@ -1,0 +1,109 @@
+﻿@page
+@model TMSQPWeb.Pages.Employees.ListModel
+@{
+}
+
+
+
+
+
+<form id="form1" method="post">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- start card -->
+                <div class="card page-card">
+
+
+
+                    <div class="card-header">
+
+                        <!--附帶或次要功能連結或按鈕-->
+                        <div class="form-function bg-yellow-lighter">
+                            <div class="items" style="display:flex;flex-direction:column;">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+
+                                </div>
+                            </div>
+                            <div class="items">
+                                
+                            </div>
+
+                            <div class="items">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table id="tbList" class="table table-hover table-bordered table-striped">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>
+                                            No
+                                        </th>
+                                        <th>
+                                            @Employee.GetDisplayName(c => c.EmployeeId)
+                                        </th>
+                                        <th>
+                                            @Employee.GetDisplayName(c => c.EmployeeName)
+                                        </th>
+                                        <th>
+                                            Create Date
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        if (Model.PG_List != null)
+                                        {
+                                            foreach (var item in Model.PG_List)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @item.EmployeeNo
+                                                    </td>
+                                                    <td>
+                                                        <a asp-page="EntityProcess" asp-route-_no="@item.EmployeeNo"
+                                                           onclick="jsPageLoading_Show();" title="">
+                                                            @item.EmployeeId
+                                                        </a>                                                        
+                                                    </td>
+                                                    <td>
+                                                        @item.EmployeeName
+                                                    </td>
+                                                    <td>
+                                                        @item.CreatedShortDateString
+                                                    </td>
+                                                </tr>
+
+                                            }
+                                        }
+
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- end card -->
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <script src="~/js/pages/employees/list.js"></script>
+
+}

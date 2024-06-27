@@ -1,0 +1,254 @@
+﻿@page "{_pn?}/{_hn?}"
+@model TMSQPWeb.Pages.Payslips.EntryDetailModel
+@{
+}
+
+
+
+@*<div class="container-fluid">
+        <partial name="~/Pages/Shared/GeneralPages/_PageHeaderPartial.cshtml" model="Model.PG_PageHeaderInfo" />
+    </div>*@
+
+
+
+<form id="form1" method="post">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- start card -->
+                <div class="card page-card">
+                    <div class="card-header">
+                        <span id="spnNotification"></span>
+
+                        <partial name="~/Pages/Shared/BriefInfos/_PayslipImportBriefPartial.cshtml" model="Model.PG_PayslipImport" />
+
+                        <div class="form-function bg-gray-lighter">
+                            <div class="items">
+                                <button asp-page-handler="ExportToPdf"
+                                        asp-route-_pn="@Model.PG_Info?.PINo" asp-route-_hn="@Model.PG_Info?.HeaderNo"
+                                        data-toggle="tooltip" title="Export and download the payslip"
+                                        onclick="jsPageLoading_Show();"
+                                        class="btn btn-primary">
+                                    <i class="fa fa-file-pdf"></i>
+                                    Export to PDF
+                                </button>
+                            </div>
+                            <div class="items">
+                                <button asp-page-handler="SendByMail"
+                                        asp-route-_pn="@Model.PG_Info?.PINo" asp-route-_hn="@Model.PG_Info?.HeaderNo"
+                                        onclick="jsPageLoading_Show();"
+                                        class="btn btn-primary">
+                                    <i class="fa fa-mail-reply"></i>
+                                    Send by email
+                                </button>
+                            </div>
+                            <div class="items">
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+
+                    <div class="card-body">
+                        <div class="inner bg-blue-lighter mb-4">
+                            <div class="flex-box">
+                                <div asp-validation-summary="None" class="dv-ValidationSummary">
+                                    <span></span>
+                                </div>
+
+                                <div class="row">
+                                    <div class="items col-6">
+                                        <div class="form-group">
+                                            <label></label>
+                                            <input type="text" asp-for="@Model.PG_Info.EmployeeName"
+                                                   data-val="false"
+                                                   readonly="readonly" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="items col-6">
+                                        <div class="form-group">
+                                            <label>E/No</label>
+                                            <input type="text" asp-for="@Model.PG_Info.EmployeeId"
+                                                   data-val="false"
+                                                   readonly="readonly" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="items col-4">
+                                        <div class="form-group">
+                                            <label>Department</label>
+                                            <input type="text" asp-for="@Model.PG_Info.DepartmentName"
+                                                   data-val="false"
+                                                   readonly="readonly" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="items col-4">
+                                        <div class="form-group">
+                                            <label>Payment</label>
+                                            <input type="text" asp-for="@Model.PG_Info.PaymentMethod"
+                                                   data-val="false"
+                                                   readonly="readonly" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="items col-4">
+                                        <div class="form-group">
+                                            <label>BANK A/C</label>
+                                            <input type="text" asp-for="@Model.PG_Info.BankAccount"
+                                                   data-val="false"
+                                                   readonly="readonly" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            INCOME
+                                        </th>
+                                        <th>
+                                            RM
+                                        </th>
+                                        <th>
+                                            DEDUCTION
+                                        </th>
+                                        <th>
+                                            RM
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        foreach (var item in Model.PG_Info.PayslipImportDetails ?? Enumerable.Empty<PayslipImportDetailViewModel>())
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @if (item.DetailTypeNo == 1)
+                                                        @item.ItemName
+                                                </td>
+                                                <td class="text-end">
+                                                    @if (item.DetailTypeNo == 1)
+                                                        @item.Amount.ToMoneyString()
+                                                </td>
+                                                <td>
+                                                    @if (item.DetailTypeNo == 2)
+                                                        @item.ItemName
+                                                </td>
+                                                <td class="text-end">
+                                                    @if (item.DetailTypeNo == 2)
+                                                        @item.Amount.ToMoneyString()
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+
+                                <tfoot>
+                                    <tr>
+                                        <td>
+                                            TOTAL:
+                                        </td>
+                                        <td class="text-end">
+                                            @Model.PG_Info.IncomeSubTotal.ToMoneyString()
+                                        </td>
+                                        <td>
+                                            TOTAL:
+                                        </td>
+                                        <td class="text-end">
+                                            @Model.PG_Info.DeductionSubTotal.ToMoneyString()
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            EPF : @Model.PG_Info.EPFAmount.ToMoneyString()
+                                            &nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;
+                                            SOCSO : @Model.PG_Info.SOCSOAmount.ToMoneyString()
+                                            &nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;
+                                            EIS : @Model.PG_Info.EISAmount.ToMoneyString()
+
+                                        </td>
+                                        <td class="text-end">
+                                            @Model.PG_Info.NettPay.ToMoneyString()
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <div class="card-footer">
+                        <!-- Form control action button start -->
+
+                    </div>
+
+
+                </div>
+                <!-- end card -->
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        
+
+
+
+        $(document).ready(function () {
+             var kdNotification = $("#spnNotification").kendoNotification().data("kendoNotification");
+
+            @{
+                if (TempData[AppSystem.TD_UI_PagePrompt_Swal] != null)
+                {
+                    var swalInfo = TempData.Get<PagePromptSwalEntity>(AppSystem.TD_UI_PagePrompt_Swal);
+                    var js = $"fnSwalShowFormMessageThenRedirect('{swalInfo.Title}', '{swalInfo.Message}', '{swalInfo.RedirectURL}');";
+                    @Html.Raw(js);
+                }
+                else if (TempData[AppSystem.TD_UI_OnPageLoad_TriggerFunction] != null)
+                {
+                    @Html.Raw(TempData[AppSystem.TD_UI_OnPageLoad_TriggerFunction].ToString());
+                }
+
+                if (TempData[AppSystem.TD_UI_OnPageLoad_Message_Notification] != null)
+                {
+                    @Html.Raw($"kdNotification.show('{TempData[AppSystem.TD_UI_OnPageLoad_Message_Notification].ToString()}');");
+                }
+            }
+
+        });
+    </script>
+
+
+}

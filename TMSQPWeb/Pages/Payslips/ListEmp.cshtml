@@ -1,0 +1,134 @@
+﻿@page "{_pn?}"
+@model TMSQPWeb.Pages.Payslips.ListEmpModel
+@{
+}
+
+
+
+
+
+
+
+<form id="form1" method="post">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- start card -->
+                <div class="card page-card">
+
+
+
+                    <div class="card-header">
+                        <partial name="~/Pages/Shared/BriefInfos/_PayslipImportBriefPartial.cshtml" model="Model.PG_Info" />
+
+
+                        <!--附帶或次要功能連結或按鈕-->
+                        <div class="form-function bg-yellow-lighter">
+                           
+                            <div class="items">
+                                <a class="btn btn-primary btn-upload"
+                                   data-toggle="tooltip" title="開啟對話視窗，選擇並指定您電腦中的（匯入）檔案">
+                                    <i class="fa fa-mail-reply-all"></i>
+                                    Sending Email
+                                </a>
+                            </div>
+
+                            <div class="items">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table id="tbList" class="table table-hover table-bordered table-striped">
+                                <thead class="table-light">
+                                    <tr>
+
+                                        <th>
+                                            @PayslipImportHead.GetDisplayName(c => c.RowNo)
+                                        </th>
+                                        <th>
+                                            @PayslipImportHead.GetDisplayName(c => c.EmployeeId)
+                                        </th>
+                                        <th>
+                                            @PayslipImportHead.GetDisplayName(c => c.EmployeeName)
+                                        </th>
+                                        <th>
+                                            @PayslipImportHead.GetDisplayName(c => c.DepartmentName)
+                                        </th>
+                                        <th>
+                                            @PayslipImportHead.GetDisplayName(c => c.IncomeSubTotal)
+                                        </th>
+                                        <th>
+                                            @PayslipImportHead.GetDisplayName(c => c.DeductionSubTotal)
+                                        </th>
+                                        <th>
+                                            @PayslipImportHead.GetDisplayName(c => c.NettPay)
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        if (Model.PG_List != null)
+                                        {
+                                            foreach (var item in Model.PG_List)
+                                            {
+                                                                        <tr>
+
+                                                                            <td class="text-center">
+                                                                                @item.RowNo
+                                                                            </td>
+                                                                            <td>
+                                                                                <a asp-page="EntryDetail" asp-route-_pn="@item.PINo" asp-route-_hn="@item.HeaderNo"
+                                                                                   onclick="jsPageLoading_Show();" title="">
+                                                                                    @item.EmployeeId
+                                                                                </a>
+                                                                            </td>
+                                                                            <td>
+                                                                                @item.EmployeeName
+                                                                            </td>
+                                                                            <td>
+                                                                                @item.DepartmentName
+                                                                            </td>
+                                                                            <td class="text-end">
+                                                                                @item.IncomeSubTotal.ToMoneyString()
+                                                                            </td>
+                                                                            <td class="text-end">
+                                                                                @item.DeductionSubTotal.ToMoneyString()
+                                                                            </td>
+                                                                            <td class="text-end">
+                                                                                @item.NettPay.ToMoneyString()
+                                                                            </td>
+                                                                        </tr>
+
+                                            }
+                                        }
+
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- end card -->
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@section Scripts  {
+    <script src="~/js/pages/payslips/listemp.js" asp-append-version="true"></script>
+}

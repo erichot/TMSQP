@@ -1,0 +1,47 @@
+﻿@page
+@model TMSQPWeb.Pages.Payslips.UploadFileModel
+@{
+}
+
+
+
+asdfadf
+
+
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+
+        $(document).ready(function () {
+           var kdNotification = $("#spnNotification").kendoNotification().data("kendoNotification");
+
+            @{
+                if (TempData[AppSystem.TD_UI_PagePrompt_Swal] != null)
+                {
+                    var swalInfo = TempData.Get<PagePromptSwalEntity>(AppSystem.TD_UI_PagePrompt_Swal);
+                    var js = $"fnSwalShowFormMessageThenRedirect('{swalInfo.Title}', '{swalInfo.Message}', '{swalInfo.RedirectURL}');";
+                    @Html.Raw(js);
+                }
+                else if (TempData[AppSystem.TD_UI_OnPageLoad_TriggerFunction] != null)
+                {
+                    @Html.Raw(TempData[AppSystem.TD_UI_OnPageLoad_TriggerFunction].ToString());
+                }
+
+                if (TempData[AppSystem.TD_UI_OnPageLoad_Message_Notification] != null)
+                {
+                    @Html.Raw($"kdNotification.show('{TempData[AppSystem.TD_UI_OnPageLoad_Message_Notification].ToString()}');");
+                }
+            }
+
+        });
+    </script>
+
+}

@@ -1,0 +1,119 @@
+﻿@page "{_no?}"
+@model TMSQPWeb.Pages.Employees.EntityProcessModel
+@{
+}
+
+
+
+
+
+
+
+
+<form id="form1" method="post">
+
+    <!-- start Container-fluid -->
+    <div class="container-fluid">
+        <!-- start row -->
+        <div class="row">
+
+
+            <div class="col-sm-12">
+
+                <!-- start card -->
+                <div class="card page-card">
+                    <div class="card-header">
+
+                        <span id="spnNotification"></span>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-box">
+
+                            <div asp-validation-summary="ModelOnly" class="dv-ValidationSummary">
+                                <span></span>
+                            </div>
+
+                            <partial name="~/Pages/Shared/GeneralForms/_EmployeeEntityPartial.cshtml" model="Model.PG_Info" />
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="card-footer">
+                        <!-- Form control action button start -->
+                        <div class="form-function bg-gray-lighter row">
+                            <div class="col-2">
+                                <div class="from-group">
+                                    <div class="from-group">
+                                        <button type="button" onclick="history.back(-1);" class="btn btn-dark">
+                                            <i class="fa fa-arrow-left"></i>
+                                            Back
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-2">
+                                <a asp-page="List" class="btn btn-warning">
+                                    <i class="fa fa-delete-left"></i>
+                                    Delete
+                                </a>
+                            </div>
+
+                            <div class="col-2">
+                                <a asp-page="List" class="btn btn-primary">
+                                    <i class="fa fa-save"></i>
+                                    Update
+                                </a>
+                            </div>
+
+                            <div class="col-2">
+                                <a asp-page="List" class="btn btn-dark">
+                                    Back to List
+                                    <i class="fa fa-list"></i>
+                                </a>
+                            </div>
+
+
+                            <!-- User submit start -->
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <!-- Form control action button end -->
+
+                    </div>
+                </div>
+                <!-- end card -->
+
+            </div>
+
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end Container-fluid -->
+
+
+
+
+</form>
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+  
+        
+}

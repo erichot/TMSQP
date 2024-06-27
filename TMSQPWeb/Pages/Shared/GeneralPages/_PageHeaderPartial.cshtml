@@ -1,0 +1,30 @@
+﻿@model PageHeaderEntity
+
+
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="page-header-left">
+                @{
+                    if (Model != null)
+                    {
+                        <input type="hidden" asp-for="Title" />
+                        <h3>
+                            @Model.Title
+                        </h3>
+                        @Html.Raw("&nbsp");
+                        <h5>
+                            @Model.SubTitle
+                        </h5>
+                    }
+                }
+
+            </div>
+        </div>
+
+
+
+        <vc:nav-bread page-id="@Model?.PageId"></vc:nav-bread>
+    </div>
+</div>

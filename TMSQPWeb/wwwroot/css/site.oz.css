@@ -1,0 +1,177 @@
+
+
+
+.form-box form {
+    display: block;
+}
+
+    .form-box form h4 {
+        margin-bottom: 2rem;
+        font-weight: bold;
+    }
+
+.form-box .inner {
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+.flex-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+    .flex-box .items.cols-auto {
+        flex: 1 1 auto;
+    }
+
+    .flex-box .items.cols-1 {
+        flex: 1 1 100%;
+    }
+
+    .flex-box .items.cols-2 {
+        flex: 0 0 calc(50% - 0.5rem);
+    }
+
+    .flex-box .items.cols-3 {
+        flex: 0 0 calc(33.333333% - 0.666667rem);
+    }
+
+    .flex-box .items.cols-23 {
+        flex: 0 0 calc(66.666666% - 0.666667rem);
+    }
+
+    .flex-box .items.cols-4 {
+        flex: 0 0 calc(25% - 0.75rem);
+    }
+
+    .flex-box .items.cols-5 {
+        flex: 0 0 calc(20% - 0.8rem);
+    }
+
+    .flex-box .items.cols-6 {
+        flex: 0 0 calc(16.66666% - 0.166666rem);
+    }
+
+    .flex-box .items.cols-56 {
+        flex: 0 0 calc(83.33334% - 0.833333rem);
+    }
+
+    .flex-box .items.cols-7 {
+        flex: 0 0 calc(14.2857% - 0.142857rem);
+    }
+
+    .flex-box .items.cols-8 {
+        flex: 0 0 calc(12.5% - 0.125rem);
+    }
+
+    .flex-box .items .form-group {
+        margin: 0;
+    }
+
+        .flex-box .items .form-group .flex-addon {
+            display: flex;
+        }
+
+            .flex-box .items .form-group .flex-addon span {
+                display: block;
+                padding: 0.375rem 0.75rem;
+                font-size: 1rem;
+                line-height: 1.5;
+                white-space: nowrap;
+            }
+
+        .flex-box .items .form-group .form-control {
+            border-radius: 5px;
+        }
+
+        .flex-box .items .form-group label {
+            font-weight: bold;
+        }
+
+            .flex-box .items .form-group label + p {
+                padding: 0.375rem 0.75rem;
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+
+        .flex-box .items .form-group .inline-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+            .flex-box .items .form-group .inline-group p {
+                display: inline-block;
+                margin: 0;
+            }
+
+            .flex-box .items .form-group .inline-group * {
+                flex: 0 0 auto;
+                width: auto !important;
+            }
+
+
+
+
+
+
+
+
+
+
+.form-function {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+    .form-function:last-child {
+        margin-bottom: 0;
+    }
+
+    .form-function .items.flex-auto {
+        flex: 1 1 auto;
+    }
+
+    .form-function .items label {
+        padding-left: .5rem;
+        font-weight: bold;
+    }
+
+    .form-function .form-control {
+        border-radius: 5px;
+    }
+
+    .form-function .btn {
+        padding: .5rem 1rem;
+        border: 1px solid rgba(0,0,0,0.2) !important;
+    }
+
+        .form-function .btn i.fa,
+        .form-function .btn i.fa {
+            margin-right: .5rem;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.bg-PayslipImportBriefInfo {
+    background-color: darkkhaki;
+}

@@ -1,0 +1,88 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*page loading  start */
+::selection {
+    background: #1976d2;
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background: #1976d2;
+    color: #ffffff;
+}
+
+.pgloadarea {
+    z-index: 9999998;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.pgloadingprog {
+    z-index: 9999999;
+    border: 3px solid #fff;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    -webkit-animation: kloading 0.5s infinite linear;
+    -moz-animation: kloading 0.5s infinite linear;
+    -o-animation: kloading 0.5s infinite linear;
+    animation: kloading 0.5s infinite linear;
+}

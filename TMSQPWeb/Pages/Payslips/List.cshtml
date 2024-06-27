@@ -1,0 +1,228 @@
+﻿@page
+@model TMSQPWeb.Pages.Payslips.ListModel
+@{
+}
+
+
+
+
+<form id="form1" method="post">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- start card -->
+                <div class="card page-card">
+
+
+
+                    <div class="card-header">
+
+                        <!--附帶或次要功能連結或按鈕-->
+                        <div class="form-function bg-yellow-lighter">
+                            <div class="items" style="display:flex;flex-direction:column;">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+
+                                </div>
+                            </div>
+                            <div class="items">
+                                <a id="hypUpload" class="btn btn-primary btn-upload"
+                                   data-toggle="tooltip" title="開啟對話視窗，選擇並指定您電腦中的（匯入）檔案">
+                                    <i class="fa fa-upload"></i>
+                                    Upload
+                                </a>
+                            </div>
+
+                            <div class="items">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table id="tbList" class="table table-hover table-bordered table-striped">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>
+                                            Period
+                                        </th>
+                                        <th>
+                                            @PayslipImport.GetDisplayName(c => c.NumberOfEmployees)
+                                        </th>
+                                        <th>
+                                            Importing Date
+                                        </th>
+                                        <th>
+                                            @PayslipImport.GetDisplayName(c => c.Remark)
+                                        </th>
+                                        <th>
+                                            Number of notification
+                                        </th>
+                                        <th>
+                                            Notified Date
+                                        </th>
+                                        <th class="text-center">
+                                            @WebBaseUI.ColHeader_ControlField_Remove
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        if (Model.PG_List != null)
+                                        {
+                                            foreach (var item in Model.PG_List)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a asp-page="ListEmp" asp-route-_pn="@item.PINo"
+                                                           onclick="jsPageLoading_Show();" title="">
+                                                            @item.Period
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        @item.NumberOfEmployees
+                                                    </td>
+
+                                                    <td>
+                                                        @item.CreatedShortDateString
+                                                    </td>
+                                                    <td>
+                                                        @item.Remark
+                                                    </td>
+                                                    <td>
+                                                        @item.NumberOfEmployees
+                                                    </td>
+                                                    <td>
+                                                        @item.CreatedShortDateString
+                                                    </td>
+                                                    <td>
+                                                        <a asp-page="List" asp-page-handler="Remove" asp-route-date-_piNo="@item.PINo"
+                                                           onclick="if (confirm('confirm to delete?')==false) return false;" >
+                                                            <img src="~/icon/delete-forever_24.png" />  
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                            }
+                                        }
+
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- end card -->
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+<div id="dialog-form">
+
+    <form id="fileupload"
+          asp-page="UploadFile"
+          asp-page-handler="Upload"
+          method="POST"
+          enctype="multipart/form-data">
+
+        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        <div class="row fileupload-buttonbar">
+            <div class="col-lg-7">
+
+                <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Choose File</span>
+                    <input type="file" id="fupImport"
+                           name="_formFile"
+                           class="form-control-file"
+                           onchange="fnfupImport_change(event)" />
+                </span>
+
+                <!-- The global file processing state -->
+                <span class="fileupload-process"></span>
+            </div>
+            <!-- The global progress state -->
+            <div class="col-lg-5 fileupload-progress fade">
+                <!-- The global progress bar -->
+                <div class="progress progress-striped active"
+                     role="progressbar"
+                     aria-valuemin="0"
+                     aria-valuemax="100">
+                    <div class="progress-bar progress-bar-success"
+                         style="width: 0%;"></div>
+                </div>
+                <!-- The extended global progress state -->
+                <div class="progress-extended">&nbsp;</div>
+            </div>
+        </div>
+
+
+        <!-- The table listing the files available for upload/download -->
+        <table id="tbFileUploadPresentation" class="table table-striped">
+
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="preview"></span>
+                    </td>
+                    <td>
+                        <p class="name" id="pFileUpload_Name">
+                            （not yet selecting any file）
+                        </p>
+                        <strong class="error text-danger"></strong>
+                    </td>
+                    <td>
+                        <p class="size" id="pFileUpload_Size">
+
+                        </p>
+                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+                    </td>
+                    <td>
+                        <button id="btn" type="button" class="btn btn-primary start"
+                                data-toggle="tooltip" title="Upload the payslip file. This may take 10 ~ 20 minutes."
+                                onclick="fnSwalBtnSubmitForUpload_OnClick('btnSubmit');">
+                            <i class="glyphicon glyphicon-upload"></i>
+                            <span>Upload</span>
+                        </button>
+
+
+                        <button id="btnSubmit" type="submit" disabled class="d-none"
+                                data-toggle="tooltip" title=""
+                                onclick="jsPageLoading_Show();">
+                            <i class="glyphicon glyphicon-upload"></i>
+                            <span></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+
+
+
+
+@section Scripts {
+    <link href="~/assets/jQueryFileUpload/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/assets/jQueryFileUpload/jquery.fileupload-ui.css" rel="stylesheet" />
+
+
+    <script src="~/js/pages/payslips/list.js" asp-append-version="true"></script>
+}

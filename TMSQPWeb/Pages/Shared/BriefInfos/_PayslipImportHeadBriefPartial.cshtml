@@ -1,0 +1,34 @@
+﻿@model PayslipImportViewModel
+
+
+
+<div class="flex-box form-function bg-PayslipImportBriefInfo">
+    <div class="items cols-6">
+        <div class="form-group">
+            <label asp-for="SalaryYearMonth"></label>
+            <input type="text" asp-for="SalaryYearMonth"
+                   data-val="false" formnovalidate="formnovalidate"
+                   class="form-control-plaintext cancel" />
+        </div>
+    </div>
+    <div class="items cols-5">
+        <div class="form-group">
+            <label asp-for="NumberOfEmployees"></label>
+            <input type="text" asp-for="NumberOfEmployees"
+                   data-val="true" required
+                   class="form-control-plaintext cancel" />
+        </div>
+    </div>
+    <div class="items cols-6">
+        <div class="form-group">
+            <div class="form-group">
+                <label asp-for="ImportedDate"></label>
+                <input type="text" asp-for="ImportedDate"
+                       data-val="false" formnovalidate="formnovalidate"
+                       class="form-control-plaintext cancel" />
+            </div>
+        </div>
+    </div>
+    
+
+</div>
